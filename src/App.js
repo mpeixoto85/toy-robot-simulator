@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import CommandInput from './components/CommandInput';
+import TableTop from './components/TableTop';
+import ReportDisplay from './components/ReportDisplay';
+import useRobot from './hook/useRobot';
+import './assets/styles.css';
 
-function App() {
+const App = () => {
+  const { position, report,error, executeCommands } = useRobot();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Toy Robot Simulator</h1>
+      <CommandInput onCommand={executeCommands} />
+
+        <TableTop position={!error ? position : ''} />
+
+     <ReportDisplay report={error || report} />
     </div>
   );
-}
+};
 
 export default App;
